@@ -18,7 +18,7 @@
   unarchive:
     remote_src: yes
     src: /tmp/discordcat_x86_64-unknown-linux-gnu.tar.gz
-    dest: /tmp
+    dest: /tmp/
   when: discordcat_result.stat.exists == false
 
 - name: move , 0755
