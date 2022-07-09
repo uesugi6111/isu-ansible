@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [master]
 jobs:
-  local:
+  docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,8 +18,17 @@ jobs:
       #   run: ansible-galaxy install -r roles/requirements.yml
       - name: ansible --version
         run: ansible --version
-      - name: Run playbook
+      - name: Run ansible playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
 
-      - name: Rerun playbook
+      - name: Rerun ansible playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
+
+  local:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ansible playbook
+        run: ansible-playbook -i localhost, -c local playbooks/ci.yml
+      - name: Rerun ansible playbook
+        run: ansible-playbook -i localhost, -c local playbooks/ci.yml
