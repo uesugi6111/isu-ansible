@@ -9,19 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # - name: Run ansible playbook
-      #   run: |
-      #     ansible-playbook playbooks/local.yml
-      # - name: Rerun ansible playbook
-      #   run: |
-      #     ansible-playbook playbooks/local.yml
       - name: Docker run ubuntu
         env:
           DOCKER_REGISTRY_URL: https://hub.docker.com/
         run: sudo docker run -d -t --name=mycontainer brunneis/python:3.9.0-ubuntu-20.04
 
-      # # - name: Install Ansible galaxy roles
-      # #   run: ansible-galaxy install -r roles/requirements.yml
+      # - name: Install Ansible galaxy roles
+      #   run: ansible-galaxy install -r roles/requirements.yml
 
-      - name: ansible
+      - name: Run playbook
+        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
+
+      - name: Rerun playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
