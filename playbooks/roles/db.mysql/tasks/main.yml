@@ -20,4 +20,4 @@
     enabled: yes
     daemon_reload: yes
     state: restarted
-  when: ansible_connection != "docker"
+  when: ansible_connection not in ["docker", "local"]
