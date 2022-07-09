@@ -1,0 +1,14 @@
+- name: install dstat (alternative of netdata!)
+  apt:
+    name: dstat
+
+- name: download install script for netdata
+  get_url:
+    url: https://my-netdata.io/kickstart-static64.sh
+    dest: /tmp/netdata.sh
+    mode: 0755
+  register: netdata
+
+- name: install netdata
+  shell: yes | /tmp/netdata.sh
+  when: netdata.changed
