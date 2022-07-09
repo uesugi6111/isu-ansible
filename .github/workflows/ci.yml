@@ -18,7 +18,7 @@ jobs:
       - name: Docker run ubuntu
         env:
           DOCKER_REGISTRY_URL: https://hub.docker.com/
-        run: sudo docker run -d -t --name=mycontainer ubuntu:20.04
+        run: sudo docker run -d -t --name=mycontainer ubuntu:18.04
 
       # - name: Install Ansible galaxy roles
       #   run: ansible-galaxy install -r roles/requirements.yml
