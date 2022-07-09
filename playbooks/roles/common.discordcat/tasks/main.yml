@@ -12,7 +12,6 @@
     url: https://github.com/k-nasa/discordcat/releases/download/0.1.0/discordcat_x86_64-unknown-linux-gnu.tar.gz
     checksum: sha1:8D69F394A66CF314BD580B7D9271A9FCCB9DCBD8
     dest: /tmp/discordcat_x86_64-unknown-linux-gnu.tar.gz
-    when: discordcat_result.stat == "false"
 
 - name: unarchive discordcat
   unarchive:
