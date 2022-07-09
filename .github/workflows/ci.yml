@@ -16,7 +16,8 @@ jobs:
 
       # - name: Install Ansible galaxy roles
       #   run: ansible-galaxy install -r roles/requirements.yml
-
+      - name: ansible --version
+        run: ansible --version
       - name: Run playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
 
