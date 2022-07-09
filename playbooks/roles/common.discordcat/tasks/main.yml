@@ -4,13 +4,14 @@
     checksum: sha1:8D69F394A66CF314BD580B7D9271A9FCCB9DCBD8
     dest: /tmp/discordcat_x86_64-unknown-linux-gnu.tar.gz
 
-- name: install discordcat
+- name: unarchive discordcat
   unarchive:
     remote_src: yes
     src: /tmp/discordcat_x86_64-unknown-linux-gnu.tar.gz
-    dest: /usr/local/bin
+    dest: /tmp
 
-- name: Changing perm of "/usr/local/bin/discordcat", 0755
-  file:
-    path: /usr/local/bin/discordcat
+- name: move , 0755
+  copy:
+    src: /tmp/discordcat_x86_64-unknown-linux-gnu/discordcat
+    dest: /usr/local/bin/
     mode: 0755
