@@ -27,6 +27,8 @@ jobs:
   local:
     runs-on: ubuntu-latest
     steps:
+      - name: ansible --version
+        run: ansible --version
       - uses: actions/checkout@v2
       - name: Run ansible playbook
         run: ansible-playbook -i localhost, -c local playbooks/ci.yml -D
