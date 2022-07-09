@@ -18,17 +18,17 @@ jobs:
       #   run: ansible-galaxy install -r roles/requirements.yml
       - name: ansible --version
         run: ansible --version
-      - name: Run ansible playbook
-        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
+      - name: Dry Run ansible playbook
+        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml -D
 
       - name: Rerun ansible playbook
-        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml
+        run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml -DC
 
   local:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run ansible playbook
-        run: ansible-playbook -i localhost, -c local playbooks/ci.yml
-      - name: Rerun ansible playbook
-        run: ansible-playbook -i localhost, -c local playbooks/ci.yml
+        run: ansible-playbook -i localhost, -c local playbooks/ci.yml -D
+      - name: Dry Run ansible playbook
+        run: ansible-playbook -i localhost, -c local playbooks/ci.yml -DC
