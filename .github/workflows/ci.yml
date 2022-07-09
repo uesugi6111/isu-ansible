@@ -1,0 +1,14 @@
+name: CI
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run ansible playbook
+        run: |
+          ansible-playbook -i localhost, -c local playbooks/app.yml

@@ -1,5 +1,4 @@
 ---
 - hosts: appservers
   roles:
-    - common
-
+    - common.discordcat
