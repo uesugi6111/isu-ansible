@@ -25,7 +25,10 @@ jobs:
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/ci.yml -DC
 
   local:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: ansible --version
         run: ansible --version
