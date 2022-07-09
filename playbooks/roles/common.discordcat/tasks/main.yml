@@ -17,4 +17,4 @@
     mode: 0755
 
 - name: execute
-  command: "discordcat"
+  command: "which discordcat"
