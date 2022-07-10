@@ -11,11 +11,11 @@
 - name: "roles/langs.rust/tasks/main: Add PATH for Rust"
   blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK Rust"
-    path: /home/isucon/.bashrc
+    path: ~/.bashrc
     content: |
-      export PATH=/home/isucon/.cargo/bin:$PATH
+      export PATH=~/.cargo/bin:$PATH
   when: cargo_result.stdout in "1.62.0"
 
 - name: "roles/langs.rust/tasks/main: Update to 1.62.0"
-  command: /home/isucon/.cargo/bin/rustup update 1.62.0
+  command: ~/.cargo/bin/rustup update 1.62.0
   when: cargo_result.stdout in "1.62.0"
