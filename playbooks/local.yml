@@ -6,3 +6,4 @@
     - lb.nginx
     - db.mysql
     - util.netdata
+    - db.pt_query_digest
