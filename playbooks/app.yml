@@ -1,4 +1,8 @@
 ---
 - hosts: appservers
   roles:
+    - common.common
     - common.discordcat
+    - util.netdata
+    - db.pt_query_digest
+    - lang.rust

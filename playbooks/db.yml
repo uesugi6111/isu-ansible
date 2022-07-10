@@ -1,4 +1,7 @@
 ---
 - hosts: dbservers
   roles:
+    - common.common
     - common.discordcat
+    - util.netdata
+    - db.pt_query_digest
