@@ -10,7 +10,7 @@
 - name: download alp
   get_url:
     url: https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_amd64.zip
-    checksum: sha1:4BD3FD8B1D9DB5A79BDECCF4B713A4A69D4DA8B9
+    checksum: sha1:8A0D95CB5C56B064587BD5D469F3372DBD3C826A
     dest: /tmp/alp_linux_amd64.zip
   when: not(alp_result.stat.exists)
 
