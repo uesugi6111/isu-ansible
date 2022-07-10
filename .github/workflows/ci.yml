@@ -18,10 +18,10 @@ jobs:
       #   run: ansible-galaxy install -r roles/requirements.yml
       - name: ansible --version
         run: ansible --version
-      - name: Dry Run ansible playbook
+      - name: Run ansible playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/docker.yml -D
 
-      - name: Rerun ansible playbook
+      - name: Dry Run ansible playbook
         run: ansible-playbook -i 'mycontainer,' -c docker -u root playbooks/docker.yml -DC
 
   local:
