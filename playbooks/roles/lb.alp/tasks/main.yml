@@ -21,10 +21,3 @@
     dest: /usr/local/bin/
     mode: 0755
   when: not(alp_result.stat.exists)
-# - name: move , 0755
-#   copy:
-#     remote_src: yes
-#     src: /tmp/discordcat_x86_64-unknown-linux-gnu/discordcat
-#     dest: /usr/local/bin/
-#     mode: 0755
-#   when: not(alp_result.stat.exists)
