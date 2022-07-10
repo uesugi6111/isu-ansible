@@ -4,3 +4,4 @@
     - common.discordcat
     - lb.nginx
     - db.mysql
+    - util.netdata
