@@ -2,12 +2,18 @@
   apt:
     name: dstat
 
+- name: check if /tmp/netdata.sh exists
+  stat:
+    path: /tmp/netdata.sh
+  register: netdata_result
+
 - name: download install script for netdata
   get_url:
     url: https://my-netdata.io/kickstart-static64.sh
     dest: /tmp/netdata.sh
     mode: 0755
   register: netdata
+  when: not(netdata_result.stat.exists)
 
 - name: install netdata
   shell: yes | /tmp/netdata.sh
