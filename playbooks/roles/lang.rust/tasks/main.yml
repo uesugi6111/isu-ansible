@@ -1,12 +1,12 @@
 - name: check if cargo is installed
-  shell: command -v cargo
-  register: cargo_exists
+  command: cargo -V
+  register: cargo_result
   ignore_errors: true
 
 - name: "roles/langs.rust/tasks/main: Install Rust"
   shell: |
     curl https://sh.rustup.rs -sSf | sh -s -- -y
-  when: cargo_exists is failed
+  when: cargo_result.stdout in "1.62.0"
 
 - name: "roles/langs.rust/tasks/main: Add PATH for Rust"
   blockinfile:
@@ -14,8 +14,8 @@
     path: /home/isucon/.bashrc
     content: |
       export PATH=/home/isucon/.cargo/bin:$PATH
-  when: cargo_exists is failed
+  when: cargo_result.stdout in "1.62.0"
 
 - name: "roles/langs.rust/tasks/main: Update to 1.62.0"
   command: /home/isucon/.cargo/bin/rustup update 1.62.0
-  when: cargo_exists is failed
+  when: cargo_result.stdout in "1.62.0"
