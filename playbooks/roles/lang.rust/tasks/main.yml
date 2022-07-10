@@ -6,7 +6,7 @@
 - name: "roles/langs.rust/tasks/main: Install Rust"
   shell: |
     curl https://sh.rustup.rs -sSf | sh -s -- -y
-  when: cargo_result.stdout in "1.62.0"
+  when: cargo_result.stdout in "1.62.0" and not(ansible_check_mode)
 
 - name: "roles/langs.rust/tasks/main: Add PATH for Rust"
   blockinfile:
@@ -14,8 +14,8 @@
     path: ~/.bashrc
     content: |
       export PATH=~/.cargo/bin:$PATH
-  when: cargo_result.stdout in "1.62.0"
+  when: cargo_result.stdout in "1.62.0" and not(ansible_check_mode)
 
 - name: "roles/langs.rust/tasks/main: Update to 1.62.0"
   command: ~/.cargo/bin/rustup update 1.62.0
-  when: cargo_result.stdout in "1.62.0"
+  when: cargo_result.stdout in "1.62.0" and not(ansible_check_mode)

@@ -13,8 +13,8 @@
     dest: /tmp/netdata.sh
     mode: 0755
   register: netdata
-  when: not(netdata_result.stat.exists)
+  when: not(netdata_result.stat.exists) and not(ansible_check_mode)
 
 - name: install netdata
   shell: yes | /tmp/netdata.sh
-  when: netdata.changed
+  when: netdata.changed and not(ansible_check_mode)
