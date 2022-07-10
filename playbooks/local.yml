@@ -7,3 +7,4 @@
     - db.mysql
     - util.netdata
     - db.pt_query_digest
+    - lb.alp
