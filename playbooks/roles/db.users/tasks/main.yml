@@ -1,21 +1,9 @@
-# - name: create mysql user
-#   shell: |
-#     mysql -e 'CREATE USER `{{ item[0:16] }}`@localhost IDENTIFIED BY "{{ item[0:16] }}"'
-#     mysql -e 'GRANT ALL ON *.* TO `{{ item[0:16] }}`@localhost'
-#   loop: "{{ users + [bot_user] }}"
-
-# - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
-#   community.mysql.mysql_user:
-#     name: isucon
-#     password: isucon
-#     priv: "*.*:ALL,GRANT"
-
-- name: install default-mysql-client
+- name: install python3-mysqldb
   apt:
     force_apt_get: yes
     state: latest
     name:
-      - default-mysql-client
+      - python3-mysqldb
 
 - name: "roles/contestant/tasks/mariadb: Set temporary password"
   become_user: root
@@ -36,11 +24,16 @@
     name: "{{ mysql_user }}"
     host: "{{ item }}"
     password: "{{ mysql_password }}"
-    priv: "{{ mysql_database }}.*:ALL,GRANT "
+    priv: "*.*:ALL,GRANT "
     state: present
   with_items:
     - localhost
     - "%"
+
+- name: Create a new database with name '{{ mysql_database }}'
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    state: present
 - name: "roles/contestant/tasks/mariadb: Remove temporary file"
   file:
     path: *myCnf
