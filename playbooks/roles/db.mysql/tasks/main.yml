@@ -1,13 +1,23 @@
+- name: uninstall mariadb-server
+  become: True
+  apt:
+    name: mariadb*
+    state: absent
+    purge: true
+
 - name: install mysql-server
+  become: true
   apt:
     name: mysql-server
 
 - name: put mysql conf
+  become: true
   copy:
     src: zz-isucon.cnf
     dest: /etc/mysql/mysql.conf.d/zz-isucon.cnf
 
 - name: change systemd service unit for mysql
+  become: true
   ini_file:
     path: /lib/systemd/system/mysql.service
     section: Service
@@ -15,6 +25,7 @@
     value: 65535
 
 - name: restart mysql
+  become: true
   systemd:
     name: mysql
     enabled: yes
