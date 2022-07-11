@@ -2,9 +2,9 @@
   apt:
     name: dstat
 
-- name: check if /tmp/netdata.sh exists
+- name: check if /lib/systemd/system/netdata.service exists
   stat:
-    path: /tmp/netdata.sh
+    path: /lib/systemd/system/netdata.service
   register: netdata_result
 
 - name: download install script for netdata

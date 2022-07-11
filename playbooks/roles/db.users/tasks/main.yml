@@ -1,5 +1,47 @@
+# - name: create mysql user
+#   shell: |
+#     mysql -e 'CREATE USER `{{ item[0:16] }}`@localhost IDENTIFIED BY "{{ item[0:16] }}"'
+#     mysql -e 'GRANT ALL ON *.* TO `{{ item[0:16] }}`@localhost'
+#   loop: "{{ users + [bot_user] }}"
+
+# - name: Create database user with password and all database privileges and 'WITH GRANT OPTION'
+#   community.mysql.mysql_user:
+#     name: isucon
+#     password: isucon
+#     priv: "*.*:ALL,GRANT"
+
+- name: install default-mysql-client
+  apt:
+    force_apt_get: yes
+    state: latest
+    name:
+      - default-mysql-client
+
+- name: "roles/contestant/tasks/mariadb: Set temporary password"
+  become_user: root
+  blockinfile:
+    create: yes
+    dest: &myCnf /home/isucon/.my.cnf
+    content: |
+      [client]
+      user = root
+      password = root
+      socket = /var/run/mysqld/mysqld.sock
+
 - name: create mysql user
-  shell: |
-    mysql -e 'CREATE USER `{{ item[0:16] }}`@localhost IDENTIFIED BY "{{ item[0:16] }}"'
-    mysql -e 'GRANT ALL ON *.* TO `{{ item[0:16] }}`@localhost'
-  loop: "{{ users + [bot_user] }}"
+  mysql_user:
+    login_host: localhost
+    login_user: root
+    login_password: root
+    name: "{{ mysql_user }}"
+    host: "{{ item }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_database }}.*:ALL,GRANT "
+    state: present
+  with_items:
+    - localhost
+    - "%"
+- name: "roles/contestant/tasks/mariadb: Remove temporary file"
+  file:
+    path: *myCnf
+    state: absent
