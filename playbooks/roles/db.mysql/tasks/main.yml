@@ -5,6 +5,12 @@
     state: absent
     purge: true
 
+- name: apt autoremove
+  become: True
+  apt:
+    purge: true
+    autoremove: true
+
 - name: install mysql-server
   become: true
   apt:
