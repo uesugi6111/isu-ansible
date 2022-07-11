@@ -30,6 +30,17 @@
     - localhost
     - "%"
 
+- name: create mysql netdata user
+  mysql_user:
+    login_host: localhost
+    login_user: root
+    login_password: root
+    name: netdata
+    password: netdata
+    host: localhost
+    priv: "*.*:ALL,GRANT "
+    state: present
+
 - name: Create a new database with name '{{ mysql_database }}'
   community.mysql.mysql_db:
     name: "{{ mysql_database }}"
