@@ -18,3 +18,10 @@
 - name: install netdata
   shell: yes | /tmp/netdata.sh
   when: netdata.changed and not(ansible_check_mode)
+
+- name: put netdata mysql conf
+  become: true
+  copy:
+    src: mysql.conf
+    dest: /etc/netdata/go.d/mysql.conf
+    mode: 0644
