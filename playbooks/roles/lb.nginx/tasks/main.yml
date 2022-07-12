@@ -18,12 +18,14 @@
   copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
+  notify: restart_nginx
 
 - name: create cache directory
   file:
     path: /var/cache/nginx/cache
     state: directory
     mode: 0777
+  notify: restart_nginx
 
 - name: change systemd service unit for nginx
   ini_file:
@@ -31,11 +33,4 @@
     section: Service
     option: LimitNOFILE
     value: 65535
-
-- name: restart nginx
-  systemd:
-    name: nginx
-    enabled: yes
-    daemon_reload: yes
-    state: restarted
-  when: ansible_connection not in ["docker", "local"]
+  notify: restart_nginx

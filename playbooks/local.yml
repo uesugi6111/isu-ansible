@@ -3,10 +3,11 @@
   roles:
     - common.common
     - common.discordcat
-    - lb.nginx
-    - db.mysql
     - util.netdata
-    - db.pt_query_digest
+    - lb.nginx
     - lb.alp
-    - lang.rust
+    - lb.restart
+    - db.mysql
     - db.restart
+    - db.pt_query_digest
+    - lang.rust

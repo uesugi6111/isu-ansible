@@ -4,8 +4,8 @@
     - common.common
     - common.discordcat
     - lb.nginx
+    - lb.restart
     - util.netdata
     - db.pt_query_digest
     - lb.alp
     - lang.rust
-    - db.restart
