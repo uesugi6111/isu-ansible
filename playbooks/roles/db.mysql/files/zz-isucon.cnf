@@ -7,9 +7,9 @@ bind-address = 0.0.0.0
 max_connections = 16384
 
 # 最終計測時はOFFにすること
-slow_query_log = OFF
-long_query_time = 1
-log_output = TABLE
+slow_query_log = ON
+long_query_time = 0
+slow_query_log_file = /var/log/mysql/mysql-slow.log
 
 # クエリキャッシュ（ONにするかは要検討）8系では使えない
 # query_cache_type = OFF 
