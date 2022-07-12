@@ -1,0 +1,7 @@
+- name: post_alp
+  become: true
+  command: discordcat -f /tmp/alp.md --filename alp.md --webhook {{discord_webhooks_url}}
+
+- name: post_pt_query_digest
+  become: true
+  command: discordcat -f /tmp/pt-query-digest.md --filename pt-query-digest.md --webhook {{discord_webhooks_url}}

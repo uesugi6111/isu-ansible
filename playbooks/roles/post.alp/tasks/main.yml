@@ -1,0 +1,11 @@
+- name: execute alp
+  become: true
+  become_user: isucon
+  shell: alp ltsv --file=/var/log/nginx/access.log -m '^/api/condition/.+','^/api/isu/.+/icon','^/api/isu/.+/graph','^/isu/.+/condition','^/isu/.+/graph','^/isu/[^/]+','^/api/isu/[^/]' --sort=sum -r
+  register: alp_command
+
+- name: Save alp
+  copy:
+    content: "{{ alp_command.stdout }}"
+    dest: /tmp/alp.md
+  notify: post_alp

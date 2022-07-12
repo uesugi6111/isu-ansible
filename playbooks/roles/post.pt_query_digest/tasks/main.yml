@@ -1,0 +1,11 @@
+- name: execute pt_query_digest
+  become: true
+  become_user: isucon
+  command: sudo /usr/bin/pt-query-digest /var/log/mysql/mysql-slow.log
+  register: pt_query_digest_command
+
+- name: Save pt_query_digest
+  copy:
+    content: "{{ pt_query_digest_command.stdout }}"
+    dest: "/tmp/pt-query-digest.md"
+  notify: post_pt_query_digest

@@ -2,7 +2,7 @@
 - hosts: all
   roles:
     - common.common
-    - common.discordcat
+    - post.discordcat
     - lb.nginx
     - lb.restart
     - util.netdata
