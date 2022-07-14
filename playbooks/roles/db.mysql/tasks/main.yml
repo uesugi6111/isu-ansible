@@ -1,12 +1,12 @@
 - name: uninstall mariadb-server
-  become: True
+  become: true
   apt:
     name: mariadb*
     state: absent
     purge: true
 
 - name: apt autoremove
-  become: True
+  become: true
   apt:
     purge: true
     autoremove: true
