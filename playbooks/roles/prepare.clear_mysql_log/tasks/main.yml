@@ -1,0 +1,13 @@
+- name: check_mysql_log
+  become: true
+  file:
+    path: /var/log/mysql/mysql-slow.log
+    mode: 0666
+
+- name: clear_mysql_log
+  become: true
+  copy:
+    dest: /var/log/mysql/mysql-slow.log
+    content: ""
+    force: true
+  notify: restart_mysql
