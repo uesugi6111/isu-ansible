@@ -5,7 +5,6 @@
     - post.discordcat
     - lb.nginx
     - lb.restart
-    - prepare.clear_mysql_log
     - prepare.clear_nginx_log
     - util.netdata
     - db.pt_query_digest
