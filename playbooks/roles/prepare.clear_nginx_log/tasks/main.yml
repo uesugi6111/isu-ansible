@@ -1,13 +1,8 @@
-- name: check_nginx_log
-  become: true
-  file:
-    path: /var/log/nginx/access.log
-    mode: 0777
-
 - name: clear_nginx_log
   become: true
   copy:
     dest: /var/log/nginx/access.log
     content: ""
     force: true
+    mode: 0777
   notify: restart_nginx
