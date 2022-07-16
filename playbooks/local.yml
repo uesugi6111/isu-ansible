@@ -7,6 +7,8 @@
     - lb.nginx
     - lb.alp
     - lb.restart
+    - prepare.clear_mysql_log
+    - prepare.clear_nginx_log
     - db.mysql
     - db.restart
     - db.pt_query_digest
