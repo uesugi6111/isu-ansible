@@ -1,0 +1,20 @@
+- name: ensure sudo keeps SSH_AUTH_SOCK in environment
+  become: true
+  copy: src=env
+    dest=/etc/sudoers.d/env
+    mode=0440
+    owner=root
+    group=root
+
+- name: check ssh-add -l
+  become: false
+  shell: ssh-add -l
+
+- name: Just get information about the repository whether or not it has already been cloned locally
+  git:
+    repo: "{{ git_repository_url }}"
+    dest: /home/isucon/webapp
+    clone: no
+    update: yes
+    accept_hostkey: false
+  become: false
