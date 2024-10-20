@@ -26,16 +26,8 @@
   become: yes
   unarchive:
     src: /tmp/go{{ version }}.{{ arch }}.tar.gz
-    dest: /usr/local/golang-{{ version }}
+    dest: /usr/local/go
   when: file_stats.results[1].stat.exists == False
-
-- name: symlink to specified version directory
-  become: yes
-  file:
-    src: "/usr/local/golang-{{ version }}/go"
-    dest: "/usr/local/go"
-    state: link
-    force: yes
 
 - name: add golang path
   become: yes
