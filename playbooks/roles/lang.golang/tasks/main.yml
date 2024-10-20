@@ -1,9 +1,3 @@
-- name: Create dest directory if not exists
-  become: yes
-  file:
-    path: "/usr/local/go"
-    state: directory
-
 - name: Check if file exists
   become: yes
   stat:
@@ -22,7 +16,14 @@
     - file_stats.results[0].stat.exists == False
     - file_stats.results[1].stat.exists == False
 
-
+- name: Create dest directory if not exists
+  become: yes
+  file:
+    path: "/usr/local/go"
+    state: directory
+  when:
+    - file_stats.results[0].stat.exists == False
+    - file_stats.results[1].stat.exists == False
 
 
 - name: unarchive specified version package  
