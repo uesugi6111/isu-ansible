@@ -1,0 +1,7 @@
+version: 1.23.2
+arch : linux-amd64
+golang:
+  src: https://go.dev/dl/go{{ version }}.{{ arch }}.tar.gz
+
+# check latest version below
+# https://go.dev/dl/
