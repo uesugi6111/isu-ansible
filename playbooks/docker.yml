@@ -10,3 +10,4 @@
     - db.pt_query_digest
     - lb.alp
     - lang.rust
+    - lang.golang

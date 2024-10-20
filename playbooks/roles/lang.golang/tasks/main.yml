@@ -1,0 +1,41 @@
+- name: Check if file exists
+  become: yes
+  stat:
+    path: "{{ item }}"
+  register: file_stats
+  with_items:
+    - /tmp/go{{ version }}.{{ arch }}.tar.gz
+    - /usr/local/go
+
+- name: get specified version archive
+  become: yes
+  get_url:
+    url: "{{ golang.src }}"
+    dest: /tmp
+  when:
+    - file_stats.results[0].stat.exists == False
+    - file_stats.results[1].stat.exists == False
+
+- name: Create dest directory if not exists
+  become: yes
+  file:
+    path: "/usr/local/go"
+    state: directory
+  when:
+    - file_stats.results[0].stat.exists == False
+    - file_stats.results[1].stat.exists == False
+
+
+- name: unarchive specified version package  
+  become: yes
+  unarchive:
+    src: /tmp/go{{ version }}.{{ arch }}.tar.gz
+    dest: /usr/local/go/
+    remote_src: true
+  when: file_stats.results[1].stat.exists == False
+
+- name: add golang path
+  become: yes
+  template:
+    src: golang.sh
+    dest: /etc/profile.d/golang.sh

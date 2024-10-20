@@ -13,3 +13,4 @@
     - db.restart
     - db.pt_query_digest
     - lang.rust
+    - lang.golang
