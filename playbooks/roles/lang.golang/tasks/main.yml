@@ -1,7 +1,7 @@
 - name: Create dest directory if not exists
   become: yes
   file:
-    path: "/usr/local/golang-{{ version }}"
+    path: "/usr/local/go"
     state: directory
 
 - name: Check if file exists
@@ -11,7 +11,7 @@
   register: file_stats
   with_items:
     - /tmp/go{{ version }}.{{ arch }}.tar.gz
-    - /usr/local/golang-{{ version }}/go
+    - /usr/local/go
 
 - name: get specified version archive
   become: yes
@@ -21,6 +21,9 @@
   when:
     - file_stats.results[0].stat.exists == False
     - file_stats.results[1].stat.exists == False
+
+
+
 
 - name: unarchive specified version package  
   become: yes
