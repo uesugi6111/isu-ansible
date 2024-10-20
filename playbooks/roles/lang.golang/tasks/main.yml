@@ -26,7 +26,7 @@
   become: yes
   unarchive:
     src: /tmp/go{{ version }}.{{ arch }}.tar.gz
-    dest: /usr/local/go
+    dest: /usr/local/go/
   when: file_stats.results[1].stat.exists == False
 
 - name: add golang path
