@@ -3,6 +3,7 @@
   roles:
     - common.common
     - post.discordcat
+    - post.discordsh
     - lb.nginx
     - lb.restart
     - prepare.clear_nginx_log

@@ -1,0 +1,29 @@
+- name: "check '/usr/local/bin/discordsh' if exist"
+  stat:
+    path: /usr/local/bin/discord.sh
+  register: discordsh_result
+
+- name: debug
+  debug:
+    var: discordsh_result
+  when: ansible_check_mode
+
+- name: download discordsh
+  get_url:
+    url: https://raw.githubusercontent.com/uesugi6111/discord.sh/refs/heads/master/discord.sh
+    dest: /tmp/discord.sh
+  when: not(discordsh_result.stat.exists)
+  register: discordsh_get_url_result
+
+- name: debug
+  debug:
+    var: discordsh_get_url_result
+  when: ansible_check_mode
+
+- name: move , 0755
+  copy:
+    remote_src: yes
+    src: /tmp/discord.sh
+    dest: /usr/local/bin/
+    mode: 0755
+  when: not(discordsh_result.stat.exists) and not(ansible_check_mode)
