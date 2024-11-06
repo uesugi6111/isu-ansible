@@ -43,6 +43,9 @@
 
 - name: Create a new database with name '{{ mysql_database }}'
   community.mysql.mysql_db:
+    login_host: localhost
+    login_user: root
+    login_password: root
     name: "{{ mysql_database }}"
     state: present
 - name: "roles/contestant/tasks/mariadb: Remove temporary file"
