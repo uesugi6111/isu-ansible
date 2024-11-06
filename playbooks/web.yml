@@ -2,7 +2,7 @@
 - hosts: webservers
   roles:
     - common.common
-    - common.discordcat
+    - post.discordsh
     - lb.nginx
     - util.netdata
     - lb.alp
