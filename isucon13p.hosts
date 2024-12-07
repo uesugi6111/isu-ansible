@@ -1,0 +1,14 @@
+[appservers]
+18.178.210.145
+# 18.181.55.60
+[dbservers]
+
+52.68.177.47
+
+
+
+[appservers:vars]
+ansible_ssh_user=isucon
+
+[dbservers:vars]
+ansible_ssh_user=isucon

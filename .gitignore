@@ -1,2 +1,6 @@
 /group_vars/isu/
 /.gitignore
+/sakura.hosts
+/isucon12q.hosts
+/playbooks/sakura.yml
+/playbooks/isucon12q.yml

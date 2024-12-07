@@ -1,0 +1,13 @@
+---
+# - hosts: appservers
+#   roles:
+#     - post.discordsh
+#     - post.alp
+
+- hosts: dbservers
+  roles:
+    - post.discordsh
+    - post.pt_query_digest
+
+  vars_files:
+    - ../group_vars/isu/isucon13p.yml

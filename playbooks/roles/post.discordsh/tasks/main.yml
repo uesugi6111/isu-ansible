@@ -1,3 +1,7 @@
+- name: install jq
+  apt:
+    name: jq
+
 - name: "check '/usr/local/bin/discordsh' if exist"
   stat:
     path: /usr/local/bin/discord.sh

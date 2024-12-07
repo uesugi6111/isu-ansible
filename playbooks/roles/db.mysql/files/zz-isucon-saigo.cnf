@@ -1,0 +1,26 @@
+[mysqld]
+
+# 外部から接続可
+bind-address = 0.0.0.0
+
+# 最大接続数
+max_connections = 16384
+
+# 最終計測時はOFFにすること
+slow_query_log = OFF
+long_query_time = 0
+slow_query_log_file = /var/log/mysql/mysql-slow.log
+
+# クエリキャッシュ（ONにするかは要検討）8系では使えない
+# query_cache_type = OFF 
+# query_cache_size = 512MB
+
+# https://www.slideshare.net/kazeburo/mysql-casual7isucon
+# https://gist.github.com/south37/d4a5a8158f49e067237c17d13ecab12a#file-03_mysql-md
+innodb_buffer_pool_size = 1GB # ディスクイメージをメモリ上にバッファさせる値をきめる設定値
+innodb_flush_log_at_trx_commit = 2 # 1に設定するとトランザクション単位でログを出力するが 2 を指定すると1秒間に1回ログファイルに出力するようになる
+innodb_flush_method = O_DIRECT # データファイル、ログファイルの読み書き方式を指定する(実験する価値はある)
+
+# disable_innodb_doublewrite = ON # InnoDBのダブルライトをOFFにする
+disable-log-bin = ON # ログをバイナリファイルに出力しない
+innodb_log_file_size = 14194304

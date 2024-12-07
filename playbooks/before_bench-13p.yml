@@ -1,0 +1,16 @@
+---
+- hosts: appservers
+  roles:
+    - post.discordsh
+    - lb.restart
+    - prepare.clear_nginx_log
+
+- hosts: dbservers
+  roles:
+    - post.discordsh
+    - db.mysql
+    - db.restart
+    - prepare.clear_mysql_log
+
+  vars_files:
+    - ../group_vars/isu/isucon13p.yml

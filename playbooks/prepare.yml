@@ -1,0 +1,11 @@
+---
+- hosts: all
+  roles:
+    # - git.clone
+    - prepare.clear_mysql_log
+    - prepare.clear_nginx_log
+    - db.restart
+    - lb.restart
+
+  vars_files:
+    - ../group_vars/isu/isucon12q.yml

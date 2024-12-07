@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - post.discordsh
+    - post.pt_query_digest
+
+  vars_files:
+    - ../group_vars/isu/isucon11q.yml

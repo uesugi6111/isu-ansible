@@ -1,7 +1,13 @@
 ---
 - hosts: dbservers
   roles:
+    - db.mysql
     - common.common
-    - common.discordcat
-    - util.netdata
+    - post.discordsh
     - db.pt_query_digest
+    - db.users
+
+    - db.restart
+
+  vars_files:
+    - ../group_vars/isu/isucon12q.yml

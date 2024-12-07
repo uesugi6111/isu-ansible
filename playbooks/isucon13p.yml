@@ -1,0 +1,9 @@
+---
+- hosts: all
+  roles:
+    - db.mysql
+    - db.users
+    - db.restart
+
+  vars_files:
+    - ../group_vars/isu/isucon13p.yml
