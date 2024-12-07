@@ -8,7 +8,7 @@
 
 - name: Check ssh-add -l
   become: false
-  ansible.builtin.shell: ssh-add -l
+  ansible.builtin.command: ssh-add -l
 
 - name: Just get information about the repository whether or not it has already been cloned locally
   ansible.builtin.git:

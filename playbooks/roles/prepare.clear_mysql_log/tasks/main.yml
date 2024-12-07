@@ -5,4 +5,4 @@
     content: ""
     force: true
     mode: "0666"
-  notify: restart_mysql
+  notify: Restart_mysql

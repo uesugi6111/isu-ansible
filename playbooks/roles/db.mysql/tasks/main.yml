@@ -15,14 +15,14 @@
   become: true
   ansible.builtin.apt:
     name: [mysql-server, python3-pymysql]
-  notify: restart_mysql
+  notify: Restart_mysql
 
 - name: Put mysql conf
   become: true
   ansible.builtin.copy:
     src: zz-isucon.cnf
     dest: /etc/mysql/mysql.conf.d/zz-isucon.cnf
-  notify: restart_mysql
+  notify: Restart_mysql
 
 - name: Change systemd service unit for mysql
   become: true
@@ -31,4 +31,4 @@
     section: Service
     option: LimitNOFILE
     value: 65535
-  notify: restart_mysql
+  notify: Restart_mysql

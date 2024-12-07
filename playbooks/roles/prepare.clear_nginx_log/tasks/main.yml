@@ -5,4 +5,4 @@
     content: ""
     force: true
     mode: 0777
-  notify: restart_nginx
+  notify: Restart_nginx

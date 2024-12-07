@@ -2,4 +2,4 @@
   ansible.builtin.shell: |
     cd /home/isucon/webapp/go/
     go build -o /home/isucon/webapp/go/isupipe
-  notify: restart_service
+  notify: Restart_service
