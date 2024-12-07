@@ -1,0 +1,8 @@
+---
+- hosts: all
+  roles:
+    - git.setup
+    - git.clone
+
+  vars_files:
+    - ../group_vars/isu/isucon14.yml

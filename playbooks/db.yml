@@ -1,5 +1,5 @@
 ---
-- hosts: dbservers
+- hosts: all
   roles:
     - db.mysql
     - common.common
@@ -10,4 +10,4 @@
     - db.restart
 
   vars_files:
-    - ../group_vars/isu/isucon12q.yml
+    - ../group_vars/isu/isucon14.yml

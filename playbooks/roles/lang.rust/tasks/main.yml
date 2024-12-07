@@ -1,21 +1,21 @@
-- name: check if cargo is installed
-  command: cargo -V
+- name: Check if cargo is installed
+  ansible.builtin.command: cargo -V
   register: cargo_result
   ignore_errors: true
 
-- name: "roles/langs.rust/tasks/main: Install Rust"
-  shell: |
+- name: "Install Rust"
+  ansible.builtin.shell: |
     curl https://sh.rustup.rs -sSf | sh -s -- -y
   when: (cargo_result.stdout.find('1.62.0') == -1) and not(ansible_check_mode)
 
-- name: "roles/langs.rust/tasks/main: Add PATH for Rust"
-  blockinfile:
+- name: "Add PATH for Rust"
+  ansible.builtin.blockinfile:
     marker: "# {mark} ANSIBLE MANAGED BLOCK Rust"
     path: ~/.bashrc
     content: |
       export PATH=~/.cargo/bin:$PATH
   when: (cargo_result.stdout.find('1.62.0') == -1) and not(ansible_check_mode)
 
-- name: "roles/langs.rust/tasks/main: Update to 1.62.0"
-  command: ~/.cargo/bin/rustup update 1.62.0
+- name: "Update to 1.62.0"
+  ansible.builtin.command: ~/.cargo/bin/rustup update 1.62.0
   when: (cargo_result.stdout.find('1.62.0') == -1) and not(ansible_check_mode)

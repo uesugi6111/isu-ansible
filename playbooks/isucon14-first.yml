@@ -1,0 +1,27 @@
+---
+- hosts: all
+  roles:
+    - common.common
+    - db.mysql
+
+    - db.users
+    - db.pt_query_digest
+
+    - post.discordsh
+
+    - git.setup
+    # - git.clone
+
+    # - lb.nginx
+    - lb.alp
+
+    - lang.golang
+
+    - prepare.clear_mysql_log
+    - prepare.clear_nginx_log
+
+    - lb.restart
+    - db.restart
+
+  vars_files:
+    - ../group_vars/isu/isucon14.yml

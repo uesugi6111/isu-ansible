@@ -1,26 +1,26 @@
-- name: install python3-mysqldb
-  apt:
-    force_apt_get: yes
-    state: latest
+- name: Install python3-mysqldb
+  ansible.builtin.apt:
+    force_apt_get: true
+    state: present
     name:
       - python3-mysqldb
 
-- name: "roles/contestant/tasks/mariadb: Set temporary password"
+- name: "Set temporary password"
   become_user: root
-  blockinfile:
-    create: yes
+  ansible.builtin.blockinfile:
+    create: true
     dest: &myCnf /home/isucon/.my.cnf
     content: |
       [client]
-      user = root
-      password = root
+      user = isucon
+      password = isucon
       socket = /var/run/mysqld/mysqld.sock
 
-- name: create mysql user
+- name: Create mysql user
   mysql_user:
     login_host: localhost
-    login_user: root
-    login_password: root
+    login_user: isucon
+    login_password: isucon
     name: "{{ mysql_user }}"
     host: "{{ item }}"
     password: "{{ mysql_password }}"
@@ -30,25 +30,25 @@
     - localhost
     - "%"
 
-- name: create mysql netdata user
-  mysql_user:
-    login_host: localhost
-    login_user: root
-    login_password: root
-    name: netdata
-    password: netdata
-    host: localhost
-    priv: "*.*:ALL,GRANT "
-    state: present
+# - name: create mysql netdata user
+#   mysql_user:
+#     login_host: localhost
+#     login_user: root
+#     login_password: root
+#     name: netdata
+#     password: netdata
+#     host: localhost
+#     priv: "*.*:ALL,GRANT "
+#     state: present
 
-- name: Create a new database with name '{{ mysql_database }}'
-  community.mysql.mysql_db:
-    login_host: localhost
-    login_user: root
-    login_password: root
-    name: "{{ mysql_database }}"
-    state: present
-- name: "roles/contestant/tasks/mariadb: Remove temporary file"
-  file:
+# - name: Create a new database with name '{{ mysql_database }}'
+#   community.mysql.mysql_db:
+#     login_host: localhost
+#     login_user: root
+#     login_password: root
+#     name: "{{ mysql_database }}"
+#     state: present
+- name: "Remove temporary file"
+  ansible.builtin.file:
     path: *myCnf
     state: absent

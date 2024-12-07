@@ -1,8 +1,8 @@
-- name: restart_mysql
+- name: Restart_mysql
   become: true
-  systemd:
+  ansible.builtin.systemd:
     name: mysql
-    enabled: yes
-    daemon_reload: yes
+    enabled: true
+    daemon_reload: true
     state: restarted
   when: ansible_connection not in ["docker", "local"]

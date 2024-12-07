@@ -1,8 +1,8 @@
-- name: clear_mysql_log
+- name: Clear_mysql_log
   become: true
-  copy:
+  ansible.builtin.copy:
     dest: /var/log/mysql/mysql-slow.log
     content: ""
     force: true
-    mode: 0666
+    mode: "0666"
   notify: restart_mysql

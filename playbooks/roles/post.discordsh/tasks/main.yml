@@ -1,33 +1,33 @@
-- name: install jq
-  apt:
+- name: Install jq
+  ansible.builtin.apt:
     name: jq
 
-- name: "check '/usr/local/bin/discordsh' if exist"
-  stat:
+- name: "Check '/usr/local/bin/discordsh' if exist"
+  ansible.builtin.stat:
     path: /usr/local/bin/discord.sh
   register: discordsh_result
 
-- name: debug
-  debug:
+- name: Debug
+  ansible.builtin.debug:
     var: discordsh_result
   when: ansible_check_mode
 
-- name: download discordsh
-  get_url:
+- name: Download discordsh
+  ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/uesugi6111/discord.sh/refs/heads/master/discord.sh
     dest: /tmp/discord.sh
   when: not(discordsh_result.stat.exists)
   register: discordsh_get_url_result
 
-- name: debug
-  debug:
+- name: Debug
+  ansible.builtin.debug:
     var: discordsh_get_url_result
   when: ansible_check_mode
 
-- name: move , 0755
-  copy:
-    remote_src: yes
+- name: Move , 0755
+  ansible.builtin.copy:
+    remote_src: true
     src: /tmp/discord.sh
     dest: /usr/local/bin/
-    mode: 0755
+    mode: "0755"
   when: not(discordsh_result.stat.exists) and not(ansible_check_mode)

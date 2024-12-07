@@ -1,30 +1,30 @@
-- name: uninstall mariadb-server
-  become: true
-  apt:
-    name: mariadb*
-    state: absent
-    purge: true
+# - name: uninstall mariadb-server
+#   become: true
+#  ansible.builtin.apt:
+#     name: mariadb*
+#     state: absent
+#     purge: true
 
-- name: apt autoremove
+- name: Set apt autoremove
   become: true
-  apt:
+  ansible.builtin.apt:
     purge: true
     autoremove: true
 
-- name: install mysql-server
+- name: Install mysql-server
   become: true
-  apt:
-    name: mysql-server
+  ansible.builtin.apt:
+    name: [mysql-server, python3-pymysql]
   notify: restart_mysql
 
-- name: put mysql conf
+- name: Put mysql conf
   become: true
-  copy:
+  ansible.builtin.copy:
     src: zz-isucon.cnf
     dest: /etc/mysql/mysql.conf.d/zz-isucon.cnf
   notify: restart_mysql
 
-- name: change systemd service unit for mysql
+- name: Change systemd service unit for mysql
   become: true
   ini_file:
     path: /lib/systemd/system/mysql.service

@@ -1,6 +1,6 @@
-- name: Restart_nginx
+- name: Restart_service
   ansible.builtin.systemd:
-    name: nginx
+    name: isupipe-go
     enabled: true
     daemon_reload: true
     state: restarted

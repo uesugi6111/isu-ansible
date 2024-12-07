@@ -1,3 +1,4 @@
-- name: install common
-  apt:
+- name: Install common
+  ansible.builtin.apt:
     name: curl
+    state: present

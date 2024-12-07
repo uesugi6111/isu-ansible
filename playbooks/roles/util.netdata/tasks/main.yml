@@ -1,27 +1,27 @@
-- name: install dstat (alternative of netdata!)
-  apt:
+- name: Install dstat (alternative of netdata!)
+  ansible.builtin.apt:
     name: dstat
 
-- name: check if /lib/systemd/system/netdata.service exists
-  stat:
+- name: Check if /lib/systemd/system/netdata.service exists
+  ansible.builtin.stat:
     path: /lib/systemd/system/netdata.service
   register: netdata_result
 
-- name: download install script for netdata
-  get_url:
+- name: Download install script for netdata
+  ansible.builtin.get_url:
     url: https://my-netdata.io/kickstart-static64.sh
     dest: /tmp/netdata.sh
-    mode: 0755
+    mode: "0755"
   register: netdata
   when: not(netdata_result.stat.exists) and not(ansible_check_mode)
 
-- name: install netdata
-  shell: yes | /tmp/netdata.sh
+- name: Install netdata
+  ansible.builtin.shell: true | /tmp/netdata.sh
   when: netdata.changed and not(ansible_check_mode)
 
-- name: put netdata mysql conf
+- name: Put netdata mysql conf
   become: true
-  copy:
+  ansible.builtin.copy:
     src: mysql.conf
     dest: /etc/netdata/go.d/mysql.conf
-    mode: 0644
+    mode: "0644"

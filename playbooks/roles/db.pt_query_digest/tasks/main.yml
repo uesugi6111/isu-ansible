@@ -1,3 +1,7 @@
-- name: install percona-toolkit
-  apt:
+- name: Update apt
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install percona-toolkit
+  ansible.builtin.apt:
     name: percona-toolkit

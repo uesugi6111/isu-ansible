@@ -1,6 +1,6 @@
 - name: clear_nginx_log
   become: true
-  copy:
+  ansible.builtin.copy:
     dest: /var/log/nginx/access.log
     content: ""
     force: true

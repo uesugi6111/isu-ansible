@@ -1,33 +1,33 @@
-- name: install nginx
-  apt:
+- name: Install nginx
+  ansible.builtin.apt:
     name: nginx
 
-- name: check nginx conf
-  stat:
+- name: Check nginx conf
+  ansible.builtin.stat:
     path: /etc/nginx/nginx.conf.orig
   register: conf
 
-- name: backup nginx conf file
-  copy:
-    remote_src: yes
+- name: Backup nginx conf file
+  ansible.builtin.copy:
+    remote_src: true
     src: /etc/nginx/nginx.conf
     dest: /etc/nginx/nginx.conf.orig
   when: not conf.stat.exists
 
-- name: put nginx conf
-  copy:
+- name: Put nginx conf
+  ansible.builtin.copy:
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
   notify: restart_nginx
 
-- name: create cache directory
-  file:
+- name: Create cache directory
+  ansible.builtin.file:
     path: /var/cache/nginx/cache
     state: directory
-    mode: 0777
+    mode: "0777"
   notify: restart_nginx
 
-- name: change systemd service unit for nginx
+- name: Change systemd service unit for nginx
   ini_file:
     path: /lib/systemd/system/nginx.service
     section: Service

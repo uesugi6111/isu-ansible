@@ -1,24 +1,24 @@
-- name: check '/usr/local/bin/alp' if exist
-  stat:
+- name: Check '/usr/local/bin/alp' if exist
+  ansible.builtin.stat:
     path: /usr/local/bin/alp
   register: alp_result
 
-- name: debug
-  debug:
+- name: db.pt_query_digestebug
+  ansible.builtin.debug:
     var: alp_result
   when: ansible_check_mode
 
-- name: download alp
-  get_url:
+- name: Download alp
+  ansible.builtin.get_url:
     url: https://github.com/tkuchiki/alp/releases/download/v1.0.9/alp_linux_amd64.tar.gz
     checksum: sha1:B60E127251EDA1D2C8907EC647DC8AE6423903A5
     dest: /tmp/alp_linux_amd64.tar.gz
   when: not(alp_result.stat.exists) and not(ansible_check_mode)
 
-- name: unarchive alp
-  unarchive:
-    remote_src: yes
+- name: Unarchive alp
+  ansible.builtin.unarchive:
+    remote_src: true
     src: /tmp/alp_linux_amd64.tar.gz
     dest: /usr/local/bin/
-    mode: 0755
+    mode: "0755"
   when: not(alp_result.stat.exists) and not(ansible_check_mode)
